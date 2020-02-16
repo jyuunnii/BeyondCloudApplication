@@ -46,7 +46,7 @@ public class SearchActivity extends AppCompatActivity {
     ListView searchResult;
     TextView textView;
 
-    ArrayList<String> data;
+    ArrayList<String> data; // Decoded Data
     ArrayAdapter adapter;
 
     String dappSmartcontractAddress;
@@ -116,7 +116,7 @@ public class SearchActivity extends AppCompatActivity {
         ethereumService.callSmartContractFunction(
                 (EthereumAccount) accountList.get(0),
                 "0x4af1b6125cca1b8cb15363aed2cc64c01937a5db",
-                "0x7355a424"
+                "0x7355a424" // a specific function code that returns the number of data in one block
         ).setCallback(new ListenableFutureTask.Callback<String>() {
             @Override
             public void onSuccess(String result) { //return hex string
@@ -161,7 +161,7 @@ public class SearchActivity extends AppCompatActivity {
 
                             data.add((String) types.get(0).getValue() + "\n" + (String) types.get(1).getValue());
 
-                            // == textBottom
+                            // ==> text_Bottom
                         }
 
                         @Override

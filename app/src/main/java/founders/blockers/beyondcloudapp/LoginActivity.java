@@ -1,36 +1,29 @@
 package founders.blockers.beyondcloudapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.samsung.android.sdk.blockchain.CoinType;
 import com.samsung.android.sdk.blockchain.ListenableFutureTask;
 import com.samsung.android.sdk.blockchain.SBlockchain;
 import com.samsung.android.sdk.blockchain.account.Account;
-import com.samsung.android.sdk.blockchain.account.ethereum.EthereumAccount;
 import com.samsung.android.sdk.blockchain.coinservice.CoinNetworkInfo;
 import com.samsung.android.sdk.blockchain.exception.SsdkUnsupportedException;
 import com.samsung.android.sdk.blockchain.network.EthereumNetworkType;
-import com.samsung.android.sdk.blockchain.ui.OnSendTransactionListener;
 import com.samsung.android.sdk.blockchain.wallet.HardwareWallet;
 import com.samsung.android.sdk.blockchain.wallet.HardwareWalletType;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity{
 

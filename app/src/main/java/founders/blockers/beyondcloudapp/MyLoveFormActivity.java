@@ -1,15 +1,10 @@
 package founders.blockers.beyondcloudapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import founders.blockers.beyondcloudapp.function.FunctionUtils;
-import founders.blockers.beyondcloudapp.ui.addBlock.AddBlockFragment;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.samsung.android.sdk.blockchain.CoinType;
 import com.samsung.android.sdk.blockchain.ListenableFutureTask;
@@ -33,9 +28,11 @@ import org.web3j.abi.datatypes.Function;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import androidx.appcompat.app.AppCompatActivity;
+import founders.blockers.beyondcloudapp.function.FunctionUtils;
 
 public class MyLoveFormActivity extends AppCompatActivity {
 
@@ -78,6 +75,14 @@ public class MyLoveFormActivity extends AppCompatActivity {
 
     }
 
+    /*
+
+    save()
+    save 'Input Data' into a block
+    before saving it performs 'encoding'
+    'Input Data' ====> Encoding ====> Block
+
+     */
     private void save() {
         name = findViewById(R.id.row_data_name);
         lifespan = findViewById(R.id.row_data_lifespan);
@@ -85,8 +90,12 @@ public class MyLoveFormActivity extends AppCompatActivity {
         photo = findViewById(R.id.row_data_photo);
         content = findViewById(R.id.row_data_content);
 
-        Function functionGetPostCount = FunctionUtils.createTx(name.getText().toString(),lifespan.getText().toString(),content.getText().toString());
-        String savedData = FunctionEncoder.encode(functionGetPostCount);
+        Function functionGetPostCount = FunctionUtils.createTx(
+                name.getText().toString(),
+                lifespan.getText().toString(),
+                content.getText().toString()); // create one Structure (FuncionUtils에서 정한 구조체타입으로)
+
+        String savedData = FunctionEncoder.encode(functionGetPostCount); // Encoding
 
         Log.d("INPUT SUCCESS", "input : "+savedData);
 
@@ -108,10 +117,10 @@ public class MyLoveFormActivity extends AppCompatActivity {
             ethereumService.sendSmartContractTransaction(
                     connectedHardwareWallet,
                     (EthereumAccount) accountList.get(0),
-                    "0x4af1b6125cca1b8cb15363aed2cc64c01937a5db",
+                    "0x4af1b6125cca1b8cb15363aed2cc64c01937a5db", // smart contract address
                     EthereumUtils.convertGweiToWei(new BigDecimal("100")),
                     new BigInteger("500000"),
-                    savedData,
+                    savedData, // that user wants to save in a block and it is hexString
                     null,
                     null)
                     .setCallback(new ListenableFutureTask.Callback<TransactionResult>() {
